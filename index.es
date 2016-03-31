@@ -22,9 +22,14 @@ function memoize(func1, func2) {
   }
 }
 
+function bind(fn, context, ...partial) {
+  return (...args) => fn.call(context, ...partial, ...args)
+}
+
 const _ = {
   once: once,
-  memoize: memoize
+  memoize: memoize,
+  bind: bind
 }
 
 module.exports = _

@@ -25,9 +25,24 @@ function memoize(func1, func2) {
   };
 }
 
+function bind(fn, context) {
+  for (var _len = arguments.length, partial = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    partial[_key - 2] = arguments[_key];
+  }
+
+  return function () {
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    return fn.call.apply(fn, [context].concat(partial, args));
+  };
+}
+
 var _ = {
   once: once,
-  memoize: memoize
+  memoize: memoize,
+  bind: bind
 };
 
 module.exports = _;
